@@ -39,7 +39,7 @@ export default function Login() {
         localStorage.setItem('token', response.data.token)
       }
       reset()
-      toast.success(response.data.message)
+      toast.success("Logged in")
       navigate('/dashboard')
     } catch (error: any) {
       toast.error(error.response.data.message)

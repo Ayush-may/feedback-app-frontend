@@ -14,9 +14,12 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import api from "@/api/axios"
 import { toast } from "sonner";
+import { useState } from "react";
+import { LoaderCircle } from "lucide-react";
 
 
 export default function Login() {
+  const [loading, setLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -27,6 +30,7 @@ export default function Login() {
 
   const onSubmit = async (data: any) => {
     try {
+      setLoading(true)
       const response = await api.post('/auth/login', {
         ...data
       })
@@ -39,6 +43,8 @@ export default function Login() {
       navigate('/dashboard')
     } catch (error: any) {
       toast.error(error.response.data.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -101,8 +107,14 @@ export default function Login() {
               </div>
             </div>
             <CardFooter className="flex-1 w-full flex-col gap-2 p-0">
-              <Button type="submit" className="w-full">
-                Login
+              <Button type="submit" className="w-full" disabled={loading} >
+                {loading ? (
+                  <div className="flex items-center gap-2"  >
+                    <LoaderCircle className="h-4 w-4 animate-spin" />
+                    Loging...
+                  </div>) : (
+                  "Login"
+                )}
               </Button>
               <Button variant="link" className="w-full ms-auto"
                 onClick={() => navigate('/register')}

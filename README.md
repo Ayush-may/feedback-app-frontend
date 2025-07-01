@@ -2,6 +2,8 @@
 
 Build with React + TypeScript + Gemini API
 
+### <a href="https://feedback-app-439y.onrender.com/" >live Demo</a>
+
 ```bash
 # clone repo
 git clone https://github.com/Ayush-may/feedback-app-frontend.git
